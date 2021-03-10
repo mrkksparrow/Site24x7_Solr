@@ -5,15 +5,23 @@ import argparse
 from jmxquery import JMXConnection
 from jmxquery import JMXQuery
 
+# if any impacting changes to this plugin kindly increment the plugin version here.
+PLUGIN_VERSION = 1
 
-PLUGIN_VERSION = 2
+# Setting this to true will alert you when there is a communication problem while posting plugin data to server
 HEARTBEAT = "true"
 
+# Enter the host name configures for the Solr JMX
 HOST_NAME = ""
+
+# Enter the port configures for the Solr JMX
 PORT = ""
+
+# Enter the domain name configures for the Solr Instance
+DOMAIN = ""
+
 URL = ""
 QUERY = ""
-DOMAIN = ""
 
 result_json = {}
 
@@ -67,6 +75,7 @@ metric_map = {
 }
 
 
+# JMX Query is executed and getting the Performance metric data after filtering the output
 def get_metrics_from_jmx(jmxConnection, QUERY, prefix):
     try:
         jmxQuery = [JMXQuery(QUERY)]
@@ -90,6 +99,7 @@ def get_metrics_from_jmx(jmxConnection, QUERY, prefix):
     return result_json
 
 
+# JMX url is defined and JMX connection is established, Query and metric keys are passed to process
 def get_output():
     URL = "service:jmx:rmi:///jndi/rmi://" + HOST_NAME + ":" + PORT + "/jmxrmi"
     try:
@@ -146,6 +156,7 @@ def get_output():
     return result_json
 
 
+# arguments are parsed from solr.cfg file and assigned with the variables
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
