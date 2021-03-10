@@ -29,6 +29,7 @@ This plugin monitors the collection of detailed performance-oriented metrics thr
 ##### Windows 
 
 - Create a directory "solr" under Site24x7 Windows Agent plugin directory - 
+
       Windows           ->   C:\Program Files (x86)\Site24x7\WinAgent\monitoring\Plugins\solr
       
 ---
