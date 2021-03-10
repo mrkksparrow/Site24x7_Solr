@@ -10,7 +10,12 @@ This plugin monitors the collection of detailed performance-oriented metrics thr
 - Plugin Uses "jmxquery" python library. This module is used to execute the jmx query and get data. Execute the below command to install python jmxquery modeule in your server.  
 
 		pip install jmxquery
+		
+- JMX connection should be enabled in the Apache Solr installation folder. To enable the JMX connection follow the below steps: Open bin/solr.in.sh inside the installation folder of Apache Solr and change the following attributes
 
+		ENABLE_REMOTE_JMX_OPTS=”true”
+		RMI_PORT=18983
+		
 
 ### Plugin installation
 ---
@@ -27,16 +32,16 @@ This plugin monitors the collection of detailed performance-oriented metrics thr
       
 ---
 
-- Download all the files in "activemq" folder and place it under the "activemq" directory
+- Download all the files in "Site24x7_Solr" folder and place it under the "solr" directory
 
-	  wget https://raw.githubusercontent.com/mrkksparrow/Site24x7_ActiveMQ/main/activemq.py?token=AJUVBT456SOY4BCPY7OW4P3AKIDTU
-	  wget https://raw.githubusercontent.com/mrkksparrow/Site24x7_ActiveMQ/main/acticemq.cfg?token=AJUVBTY6WNAMQ6F6FXOVVSTAKIDRY
+	  wget https://raw.githubusercontent.com/mrkksparrow/Site24x7_Solr/main/solr.py?token=AJUVBT5ZWHQRJ53YGQHYYTDAKIILE
+	  wget https://raw.githubusercontent.com/mrkksparrow/Site24x7_Solr/main/solr.cfg?token=AJUVBT7JQRKYBMCVUJEKU2DAKIIJW
 	
 - Configure the keys to be monitored, as mentioned in the configuration section below.
 
 - Execute the below command with appropriate arguments to check for the valid json output.  
 
-		python activemq.py –-host_name=localhost -–port=1099 -–broker_name=<your_broker_name> --destination_name=<your_destination_name>
+		python solr.py –-host_name=localhost -–port=18983 -–domain_name=<your_domain_name>
 
 
 The agent will automatically execute the plugin within five minutes and send performance data to the Site24x7 data center.
@@ -45,38 +50,63 @@ The agent will automatically execute the plugin within five minutes and send per
 ---
 	[display_name]
 	host_name = “<your_host_name>”
-	port = “1099”
-	broker_name = “<your_broker_name>”
-	destination_name = “<your_destination_name>”
+	port = “18983”
+	domain_name = “<your_domain_name>”
 
 ### Metrics Captured
 ---
-	memory_percent_usage -> metric calculates the percentage of memory used by the given Broker in your ActiveMQ Setup. [percent]
+	cache_evictions - metric calculate the number of cache evictions across all caches since this node has been running in your Apache Solr Setup. [eviction]
 
-	storage_percent_usage -> metric calculates the percentage of storage used by the given Broker in your ActiveMQ Setup. [percent]
+	cache_hits - metric calculate the number of cache hits across all caches since this node has been running in your Apache Solr Setup. [hit]
 
-	temp_percent_usage -> metric calculates the percentage of temp used by the given Broker in your ActiveMQ Setup. [percent]
+	cache_insertst - metric calculate the number of cache insertions across all caches since this node has been running in your Apache Solr Setup. [set]
 
-	avg_enqueue_time -> metric calculate the average amount of time, the messages remained enqueued in the queue of the given Broker of your ActiveMQ Setup. [millisecond]
+	cache_lookups - metric calculate the number of cache lookups across all caches since this node has been running in your Apache Solr Setup. [get]
 
-	min_enqueue_time -> metric calculate the minimum amount of time, the messages remained enqueued in the queue of the given Broker of your ActiveMQ Setup. [millisecond]
+	document_cache_evictions - metric calculate the number of cache evictions across document caches since this node has been running in your Apache Solr Setup. [eviction]
 
-	max_enqueue_time -> metric calculate the maximum amount of time, the messages remained enqueued in the queue of the given Broker of your ActiveMQ Setup. [millisecond]
+	document_cache_hits - metric calculate the number of cache hits across document caches since this node has been running in your Apache Solr Setup. [hit]
 
-	dequeue_count -> metric calculate the number of messages that remained dequeued in the queue of the given Broker of your ActiveMQ Setup. [message]
+	document_cache_inserts - metric calculate the number of cache insertions across document caches since this node has been running in your Apache Solr Setup. [set]
+
+	document_cache_lookups - metric calculate the number of cache lookups across document caches since this node has been running in your Apache Solr Setup. [get]
+
+	filter_cache_evictions - metric calculate the number of cache evictions across filter caches since this node has been running in your Apache Solr Setup. [eviction]
+
+	filter_cache_hits - metric calculate the number of cache hits across filter caches since this node has been running in your Apache Solr Setup. [hit]
+
+	filter_cache_inserts - metric calculate the number of cache insertions across filter caches since this node has been running in your Apache Solr Setup. [set]
+
+	filter_cache_lookups - metric calculate the number of cache lookups across filter caches since this node has been running in your Apache Solr Setup. [get]
+
+	query_result_cache_evictions - metric calculate the number of cache evictions across query result caches since this node has been running in your Apache Solr Setup. [eviction]
+
+	query_result_cache_hits - metric calculate the number of cache hits across query result caches since this node has been running in your Apache Solr Setup. [hit]
+
+	query_result_cache_inserts - metric calculate the number of cache insertions across query result caches since this node has been running in your Apache Solr Setup. [set]
+
+	query_result_cache_lookups - metric calculate the number of cache lookups across query result caches since this node has been running in your Apache Solr Setup. [get]
+
+	request_times_50percentile - metric calculate the request processing time for the request which belongs to the 50th Percentile. E.g., if 100 requests are received, then the 50th fastest request time will be reported by this statistic. [request]
+
+	request_times_75percentile - metric calculate the request processing time for the request which belongs to the 75th Percentile. E.g., if 100 requests are received, then the 75th fastest request time will be reported by this statistic. [request]
+
+	request_times_95percentile - metric calculate the request processing time for the request which belongs to the 95th Percentile. E.g., if 100 requests are received, then the 95th fastest request time will be reported by this statistic. [request]
+
+	request_times_98percentile - metric calculate the request processing time for the request which belongs to the 98th Percentile. E.g., if 100 requests are received, then the 98th fastest request time will be reported by this statistic. [request]
+
+	request_times_99percentile - metric calculate the request processing time for the request which belongs to the 99th Percentile. E.g., if 100 requests are received, then the 99th fastest request time will be reported by this statistic. [request]
+
+	request_times_999percentile - metric calculate the request processing time for the request which belongs to the 99.9th Percentile. E.g., if 1000 requests are received, then the 999th fastest request time will be reported by this statistic. [request]
+
+	request_times_mean - metric calculate the mean of all the request processing time since this node has been running in your Apache Solr Setup. [request/second]
+
+	request_times_mean_rate - metric calculate the average number of requests received per second since the Solr core was first created in your Apache Solr Setup. [request/second]
+
+	request_times_one_minute_rate - metric calculate the number of requests per second received over the past one minute since this node has been running in your Apache Solr Setup. [request/second]
 	
-	enqueue_count -> metric calculate the number of messages that remained enqueued in the queue of the given Broker of your ActiveMQ Setup. [message]
+	searcher_maxdocs - metric calculate the number of updates that have occurred since the last commit in your Apache Solr Setup. [document]
 
-	consumer_count -> metric counts and records the number of consumers connected in the queue of the given Broker of your ActiveMQ Setup. [count]
+	searcher_numdocs - metric calculate the total number of indexed documents that can be searched in your Apache Solr Setup. [document]
 
-	producer_count -> metric counts and records the number of producers connected in the queue of the given Broker of your ActiveMQ Setup. [count]
-
-	dispatch_count -> metric counts and records the number of messages that have been dispatched in the queue of the given Broker of your ActiveMQ Setup. [message]
-
-	queue_size -> metric calculate the number of messages that remained in the queue of the given Broker of your ActiveMQ Setup. [message]
-
-	memory_percent -> metric calculate the percentage of memory currently used in the queue of the given Broker of your ActiveMQ Setup. [percent]
-
-	expired_count -> metric calculate the number of messages that have been expired in the queue of the given Broker of your ActiveMQ Setup. [message]
-
-	in_flight_count -> metric calculate the number of messages that have been in flight in the queue of the given Broker of your ActiveMQ Setup. [message]		
+	searcher_warmup - metric calculate the total time spent on warming up the cache by pre-populating some cache items in your Apache Solr Setup. [millisecond]
