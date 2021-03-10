@@ -24,7 +24,6 @@ This plugin monitors the collection of detailed performance-oriented metrics thr
 - Create a directory "solr" under Site24x7 Linux Agent plugin directory - 
 
       Linux (Root)      ->   /opt/site24x7/monagent/plugins/solr
-      
       Linux (Non Root)  ->   /home/<user_name>/site24x7/monagent/plugins/solr
 
 ##### Windows 
