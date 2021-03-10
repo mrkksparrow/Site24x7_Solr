@@ -36,8 +36,8 @@ This plugin monitors the collection of detailed performance-oriented metrics thr
 
 - Download all the files in "Site24x7_Solr" folder and place it under the "solr" directory
 
-	  wget https://raw.githubusercontent.com/mrkksparrow/Site24x7_Solr/main/solr.py?token=AJUVBT5ZWHQRJ53YGQHYYTDAKIILE
-	  wget https://raw.githubusercontent.com/mrkksparrow/Site24x7_Solr/main/solr.cfg?token=AJUVBT7JQRKYBMCVUJEKU2DAKIIJW
+	  wget https://raw.githubusercontent.com/mrkksparrow/Site24x7_Solr/main/solr.py
+	  wget https://raw.githubusercontent.com/mrkksparrow/Site24x7_Solr/main/solr.cfg
 	
 - Configure the keys to be monitored, as mentioned in the configuration section below.
 
